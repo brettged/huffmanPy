@@ -22,11 +22,11 @@ def countChars(file, countList):
             break
         else:
             tempNode = huffmanNode(char)
-            
+
             # if the list is empty, add the first node
             if len(countList) == 0:
                 tempNode.freq = 1
-                countList.append(tempNode)    
+                countList.append(tempNode)
             else:
                 for i in range(0, len(countList)):
                     if countList[i] == tempNode:
@@ -56,33 +56,18 @@ def main():
 
     print("\n")
 
-    # create a max heap from the list of characters 
-    for nodes in charList:
-        hq.heappush(charHeap, nodes)
+    charList.sort()
+
+    for node in charList:
+        print(node)
+
+    # create a max heap from the list of characters
+    # for nodes in charList:
+    #     hq.heappush(charHeap, nodes)
 
     # should print in heap order
-    while charHeap:
-        print(hq.heappop(charHeap))
+    # while charHeap:
+    #     print(hq.heappop(charHeap))
 
 if __name__ == '__main__':
     main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
