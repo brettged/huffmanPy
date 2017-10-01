@@ -1,0 +1,3 @@
+
+This file is a test text file to perform huffman encoding on the contents of a 
+text file. blah blah blah.
