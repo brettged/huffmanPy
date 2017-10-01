@@ -4,7 +4,7 @@
 """
 
 
-class huffmanNode():
+class HuffmanNode():
 
     def __init__(self, key):
 
@@ -22,11 +22,76 @@ class huffmanNode():
          return self.freq < other.freq
 
     def __eq__(self, other):
-        return self.char == other.char
+        return self.key == other.key
 
     # overload to print a node
     def __str__(self):
-        return (str(ord(self.char)) + ": " + str(self.freq))
+        return self.key + ": " + str(self.freq) + "Bit: " + self.bitType
 
 
-# class huffmanTree():
+class HuffmanTree():
+
+    # initialize tree to use the previously created list of nodes
+    def __init__(self, nodeList):
+        self.nodeList = nodeList
+        self.updateList()
+        self.root = None
+
+    def updateList(self):
+        self.nodeList.sort()
+
+    # def __str__(self):
+    #     self.printTree(self.root)
+    #     return("done printing")
+
+
+
+        # for node in self.nodeList:
+        #     print(node)
+        # return "done printing tree"
+
+    def combineNodes(self):
+        node1 = self.nodeList[0]
+        node2 = self.nodeList[1]
+        # create a new node thats combines the two lowest frequency nodes
+        comboStr = node1.key + node2.key
+        newNode = HuffmanNode(comboStr)
+        newNode.freq = node1.freq + node2.freq
+
+        # set the new nodes children based off of lowest frequency
+        if node1 < node2:
+            newNode.leftchild = node1
+            newNode.rightchild = node2
+        else:
+            newNode.leftchild = node2
+            newNode.rightchild = node1
+
+        # set bit type. This corresponds to the encoding path
+        newNode.leftchild.bitType = '0'
+        newNode.rightchild.bitType = '1'
+
+        # pop the two lowest frequency characters off of the list
+        self.nodeList.pop(0)
+        self.nodeList.pop(0)
+
+        # put new node into the list and re-sort to give a min heap
+        self.nodeList.insert(0, newNode)
+        self.nodeList.sort()
+
+
+    def buildTree(self):
+        while len(self.nodeList) > 1:
+            self.combineNodes()
+
+        self.root = self.nodeList[0]
+
+
+    # traverse the tree and print each node
+    def printTree(self, rootNode):
+
+        if rootNode:
+
+            print(rootNode)
+            print("\n")
+            self.printTree(rootNode.leftchild)
+            self.printTree(rootNode.rightchild)

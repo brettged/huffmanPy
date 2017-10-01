@@ -5,8 +5,8 @@ Created on Fri Sep 15 12:36:47 2017
 @author: brett
 """
 
-from huffmanNode import huffmanNode
-
+from HuffmanNode import HuffmanNode
+from HuffmanNode import HuffmanTree
 
 import heapq as hq
 
@@ -21,7 +21,7 @@ def countChars(file, countList):
         if not char:
             break
         else:
-            tempNode = huffmanNode(char)
+            tempNode = HuffmanNode(char)
 
             # if the list is empty, add the first node
             if len(countList) == 0:
@@ -49,17 +49,24 @@ def main():
 
     # call function to read in all characters
     countChars(inFile, charList)
+    charList.sort()
 
-    # print nodes with character counts for sanity check
-#    for nodes in charList:
-#        print(nodes)
+
+    tree = HuffmanTree(charList)
+
+    # print("Initial Huffman List")
+    # print(tree)
+
+
+    tree.buildTree()
 
     print("\n")
 
-    charList.sort()
+    print("After building tree")
+    tree.printTree(tree.root)
 
-    for node in charList:
-        print(node)
+    # for node in charList:
+    #     print(node)
 
     # create a max heap from the list of characters
     # for nodes in charList:
