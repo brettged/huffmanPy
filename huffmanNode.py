@@ -1,6 +1,10 @@
-"""Class for nodes of the binary huffman tree
+"""
 
-[description]
+Class definitions for HuffmanTree and HuffmanNode
+
+Brett Gedvilas and David Ward
+CSCI 5451
+Last Updated: 10/1/2017
 """
 
 
@@ -37,18 +41,9 @@ class HuffmanTree():
         self.updateList()
         self.root = None
 
+    # inserts a new node and sorts the list back into ascending order
     def updateList(self):
         self.nodeList.sort()
-
-    # def __str__(self):
-    #     self.printTree(self.root)
-    #     return("done printing")
-
-
-
-        # for node in self.nodeList:
-        #     print(node)
-        # return "done printing tree"
 
     def combineNodes(self):
         node1 = self.nodeList[0]
@@ -80,9 +75,12 @@ class HuffmanTree():
 
 
     def buildTree(self):
+        # continue combining nodes together until the list is of size 1
         while len(self.nodeList) > 1:
             self.combineNodes()
 
+        # set root of huffman tree equal to the last 'mega' node we created
+        # which contains all chars
         self.root = self.nodeList[0]
 
 
@@ -92,6 +90,26 @@ class HuffmanTree():
         if rootNode:
 
             print(rootNode)
-            print("\n")
+            # print("\n") # print newline for readability
             self.printTree(rootNode.leftchild)
             self.printTree(rootNode.rightchild)
+
+    # this function recursively traverses the tree and calculates the huffman code
+    # for each leaf in the tree. Each leaf corresponds to an individual character
+    def getCodes(self, rootNode, code, codeDict):
+
+        if rootNode:
+            code += rootNode.bitType # keep appending values to code
+
+            # if the node has no children then we are at a leaf and we add the
+            # key-value pair to the dictionary (key = character, value = huffcode)
+            # From how the tree is constructed we know each node has either 2 or
+            # 0 childen so we don't need to check to see if both exist
+            if not rootNode.leftchild:
+                codeDict[rootNode.key] = code
+
+            # recursively call for the left and right children
+            self.getCodes(rootNode.leftchild, code, codeDict)
+            self.getCodes(rootNode.rightchild, code, codeDict)
+
+        return
