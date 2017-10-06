@@ -4,7 +4,7 @@ Class definitions for HuffmanTree and HuffmanNode
 
 Brett Gedvilas and David Ward
 CSCI 5451
-Last Updated: 10/1/2017
+Last Updated: 10/6/2017
 """
 
 # use the pygraphviz wrapper to plot the huffman tree
@@ -54,7 +54,7 @@ class HuffmanTree():
         self.root = None
 
         self.pygraph = pgv.AGraph() # create a graph within our class for plotting purposes
-        self.pygraph.graph_attr['label'] = "Huffman Tree!"
+        self.pygraph.graph_attr['label'] = "Huffman Tree"
 
     def update_list(self):
         """

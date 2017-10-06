@@ -1,5 +1,5 @@
 strict graph  {
-	graph [label="Huffman Tree!"];
+	graph [label="Huffman Tree"];
 	"Tp: 2" -- "T: 1"	 [color=blue,
 		label=1];
 	"Tp: 2" -- "p: 1"	 [color=red,
