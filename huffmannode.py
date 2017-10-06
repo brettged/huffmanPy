@@ -7,6 +7,7 @@ CSCI 5451
 Last Updated: 10/1/2017
 """
 
+# use the pygraphviz wrapper to plot the huffman tree
 import pygraphviz as pgv
 
 

@@ -11,8 +11,8 @@ Last Updated: 10/1/2017
 Huffman Encoding Program
 """
 
-from huffmanNode import HuffmanNode
-from huffmanNode import HuffmanTree
+from huffmannode import HuffmanNode
+from huffmannode import HuffmanTree
 
 
 def count_chars(file, count_list):
@@ -123,13 +123,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
-
-        # # ********* attempt at graphical stuff **************
-        #     # add nodes
-        # self.pygraph.add_node(node1)
-        # self.pygraph.add_node(node2)
-        # self.pygraph.add_node(new_node)
-        #     # create edges between parent and children nodes
-        # self.pygraph.add_edge(new_node, node1)
-        # self.pygraph.add_edge(new_node, node2)
