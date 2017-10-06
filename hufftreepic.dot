@@ -1,0 +1,109 @@
+strict graph  {
+	graph [label="Huffman Tree!"];
+	"Tp: 2" -- "T: 1"	 [color=blue,
+		label=1];
+	"Tp: 2" -- "p: 1"	 [color=red,
+		label=0];
+	"ud: 2" -- "u: 1"	 [color=blue,
+		label=1];
+	"ud: 2" -- "d: 1"	 [color=red,
+		label=0];
+	"gud: 3" -- "ud: 2"	 [color=blue,
+		label=1];
+	"gud: 3" -- "g: 1"	 [color=red,
+		label=0];
+	"Tpx: 4" -- "Tp: 2"	 [color=blue,
+		label=1];
+	"Tpx: 4" -- "x: 2"	 [color=red,
+		label=0];
+	"rm: 4" -- "r: 2"	 [color=blue,
+		label=1];
+	"rm: 4" -- "m: 2"	 [color=red,
+		label=0];
+	"c.: 4" -- "c: 2"	 [color=blue,
+		label=1];
+	"c.: 4" -- ".: 2"	 [color=red,
+		label=0];
+	"gud
+: 6" -- "gud: 3"	 [color=blue,
+		label=1];
+	"gud
+: 6" -- "
+: 3"	 [color=red,
+		label=0];
+	"bc.: 7" -- "c.: 4"	 [color=blue,
+		label=1];
+	"bc.: 7" -- "b: 3"	 [color=red,
+		label=0];
+	"rmTpx: 8" -- "Tpx: 4"	 [color=red,
+		label=0];
+	"rmTpx: 8" -- "rm: 4"	 [color=blue,
+		label=1];
+	"sgud
+: 10" -- "gud
+: 6"	 [color=blue,
+		label=1];
+	"sgud
+: 10" -- "s: 4"	 [color=red,
+		label=0];
+	"hi: 12" -- "h: 6"	 [color=blue,
+		label=1];
+	"hi: 12" -- "i: 6"	 [color=red,
+		label=0];
+	"la: 12" -- "l: 6"	 [color=blue,
+		label=1];
+	"la: 12" -- "a: 6"	 [color=red,
+		label=0];
+	"on: 12" -- "o: 6"	 [color=blue,
+		label=1];
+	"on: 12" -- "n: 6"	 [color=red,
+		label=0];
+	"bc.f: 14" -- "bc.: 7"	 [color=blue,
+		label=1];
+	"bc.f: 14" -- "f: 7"	 [color=red,
+		label=0];
+	"rmTpxsgud
+: 18" -- "rmTpx: 8"	 [color=red,
+		label=0];
+	"rmTpxsgud
+: 18" -- "sgud
+: 10"	 [color=blue,
+		label=1];
+	"et: 20" -- "e: 10"	 [color=blue,
+		label=1];
+	"et: 20" -- "t: 10"	 [color=red,
+		label=0];
+	"onla: 24" -- "la: 12"	 [color=red,
+		label=0];
+	"onla: 24" -- "on: 12"	 [color=blue,
+		label=1];
+	"hibc.f: 26" -- "hi: 12"	 [color=red,
+		label=0];
+	"hibc.f: 26" -- "bc.f: 14"	 [color=blue,
+		label=1];
+	"rmTpxsgud
+ : 37" -- "rmTpxsgud
+: 18"	 [color=red,
+		label=0];
+	"rmTpxsgud
+ : 37" -- " : 19"	 [color=blue,
+		label=1];
+	"etonla: 44" -- "et: 20"	 [color=red,
+		label=0];
+	"etonla: 44" -- "onla: 24"	 [color=blue,
+		label=1];
+	"hibc.frmTpxsgud
+ : 63" -- "hibc.f: 26"	 [color=red,
+		label=0];
+	"hibc.frmTpxsgud
+ : 63" -- "rmTpxsgud
+ : 37"	 [color=blue,
+		label=1];
+	"etonlahibc.frmTpxsgud
+ : 107" -- "etonla: 44"	 [color=red,
+		label=0];
+	"etonlahibc.frmTpxsgud
+ : 107" -- "hibc.frmTpxsgud
+ : 63"	 [color=blue,
+		label=1];
+}

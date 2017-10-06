@@ -11,14 +11,15 @@ Last Updated: 10/1/2017
 Huffman Encoding Program
 """
 
-from HuffmanNode import HuffmanNode
-from HuffmanNode import HuffmanTree
+from huffmanNode import HuffmanNode
+from huffmanNode import HuffmanTree
 
-import heapq as hq
 
-# reads characters from a file and creates and inputs them into a list
-# containing the frequency of each character.
-def countChars(file, countList):
+def count_chars(file, count_list):
+    """
+    Reads characters from a file and creates and inputs them into a list
+    containing the frequency of each character.
+    """
 
     while True:
 
@@ -27,77 +28,108 @@ def countChars(file, countList):
         if not char:
             break
         else:
-            tempNode = HuffmanNode(char)
+            temp_node = HuffmanNode(char)
 
             # if the list is empty, add the first node
-            if len(countList) == 0:
-                tempNode.freq = 1
-                countList.append(tempNode)
+            if len(count_list) == 0:
+                temp_node.freq = 1
+                count_list.append(temp_node)
             else:
-                for i in range(0, len(countList)):
-                    if countList[i] == tempNode:
-                        countList[i].freq += 1
+                for i in range(0, len(count_list)):
+                    if count_list[i] == temp_node:
+                        count_list[i].freq += 1
                         break
-                    elif i == len(countList)-1:
-                        tempNode.freq = 1
-                        countList.append(tempNode)
+                    elif i == len(count_list)-1:
+                        temp_node.freq = 1
+                        count_list.append(temp_node)
 
 
-# uses calculate dictionary to write encoded characters to a new file
-def encode(input, output, dict):
+def encode(inputfile, outputfile, chardict):
+    """
+    Uses calculate dictionary to write encoded characters to a new file
+    """
 
     while True:
 
         # read in characters one at a time from input file
-        char = input.read(1)
+        char = inputfile.read(1)
         if not char:
             break
 
         else:
             # retrieve the encoded value from the dictionary and write it to the
             # output file
-            output.write(dict[char])
+            outputfile.write(chardict[char])
+
+# def build_visual(hufftree, visual):
+#
+#     temp_node = hufftree.root
 
 
 def main():
-
+    """
+    Main program driver for the huffman tree program.
+    """
 
     print("\nHuffman Encoding\nBrett Gedvilas and David Ward")
 
-    # open file to read
-    inFile = open("testFile.txt", "r")
-    outFile = open("encoded.txt", "w")
+    # open the file we want to encode and an output file showing the string
+    # encoding
+    in_file = open("testFile.txt", "r")
+    out_file = open("encoded.txt", "w")
 
-    charList = [] # List that holds the huffmanNode objects from the file
-    charHeap = [] # create a heap to store char/value pairs
+    char_list = [] # List that holds the huffmanNode objects from the file
 
     # call function to read in all characters
-    countChars(inFile, charList)
-    inFile.close()
+    count_chars(in_file, char_list)
+    in_file.close()
 
     # sort list of nodes into ascending order so nodes with highest priority
     # are at the front (lowest frequency at front)
-    charList.sort()
+    char_list.sort()
+
+    # for node in char_list:
+    #
+    #     print(node)
 
     # create a instance of the huffman tree class
-    tree = HuffmanTree(charList)
+    tree = HuffmanTree(char_list)
 
     # call function to build up the tree
-    tree.buildTree()
+    tree.build_tree()
 
-    print("codes")
-    tempCodeString = ""
-    huffCodeDict = {}
-    tree.getCodes(tree.root, tempCodeString, huffCodeDict)
+    # print("codes")
+    temp_code_string = ""
+    huff_code_dict = {}
+    tree.get_codes(tree.root, temp_code_string, huff_code_dict)
 
-    # print(codeDict)
-    inFile = open("testFile.txt", "r")
-    encode(inFile, outFile, huffCodeDict)
+    for node in huff_code_dict:
+        print(node + ": " + huff_code_dict[node])
+    # print(huff_code_dict)
+    in_file = open("testFile.txt", "r")
+    encode(in_file, out_file, huff_code_dict)
 
     # close files
-    inFile.close()
-    outFile.close()
+    in_file.close()
+    out_file.close()
+
+    # tree.print_tree(tree.root)
+
+    # export graph to a neat picture
+    tree.pygraph.write('hufftreepic.dot')
+    tree.pygraph.layout(prog='dot')
+    tree.pygraph.draw('treePic.png')
 
 
 if __name__ == '__main__':
     main()
+
+
+        # # ********* attempt at graphical stuff **************
+        #     # add nodes
+        # self.pygraph.add_node(node1)
+        # self.pygraph.add_node(node2)
+        # self.pygraph.add_node(new_node)
+        #     # create edges between parent and children nodes
+        # self.pygraph.add_edge(new_node, node1)
+        # self.pygraph.add_edge(new_node, node2)
