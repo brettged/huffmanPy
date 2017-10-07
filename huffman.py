@@ -10,7 +10,9 @@ Huffman Encoding Program
 from huffmannode import HuffmanNode
 from huffmannode import HuffmanTree
 
-import webbrowser
+# import webbrowser
+
+from PIL import Image
 
 
 def parse_file(file, count_list):
@@ -143,9 +145,10 @@ def run_on_file(char_list, filename):
     # display the huffman tree
     # subprocess.Popen(['eom', filename[:-4] + 'treePic.png'])
 
-    # img = Image.open(filename[:-4] + 'treePic.png')
+    img = Image.open(filename[:-4] + 'treePic.png')
+    img.show()
 
-    webbrowser.open(filename[:-4] + 'treePic.png')
+    # webbrowser.open(filename[:-4] + 'treePic.png')
 
 def run_on_string(char_list, user_input):
     """ Runs huffman encoding on a string provided by the user.
@@ -182,12 +185,12 @@ def run_on_string(char_list, user_input):
 
     # subprocess.Popen(['open', 'usertreePic.png'])
 
-    # display the generate huffman tree
-    # img = Image.open('usertreePic.png')
-    # img.show()
+    # display the generated huffman tree
+    img = Image.open('usertreePic.png')
+    img.show()
 
     # display the huffman tree
-    webbrowser.open('usertreePic.png')
+    # webbrowser.open('usertreePic.png')
 
 def main():
     """
