@@ -1,4 +1,4 @@
-strict graph  {
+strict graph "" {
 	graph [label="Huffman Tree"];
 	"He: 2" -- "H: 1"	 [color=blue,
 		label=1];
