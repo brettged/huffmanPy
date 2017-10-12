@@ -1,8 +1,8 @@
 strict graph "" {
 	graph [label="Huffman Tree"];
-	"He: 2" -- "H: 1"	 [color=blue,
+	"he: 2" -- "h: 1"	 [color=blue,
 		label=1];
-	"He: 2" -- "e: 1"	 [color=red,
+	"he: 2" -- "e: 1"	 [color=red,
 		label=0];
 	" W: 2" -- " : 1"	 [color=blue,
 		label=1];
@@ -12,24 +12,20 @@ strict graph "" {
 		label=1];
 	"rd: 2" -- "d: 1"	 [color=red,
 		label=0];
-	"!rd: 3" -- "rd: 2"	 [color=blue,
+	"rd W: 4" -- " W: 2"	 [color=red,
+		label=0];
+	"rd W: 4" -- "rd: 2"	 [color=blue,
 		label=1];
-	"!rd: 3" -- "!: 1"	 [color=red,
-		label=0];
-	" WHe: 4" -- "He: 2"	 [color=red,
-		label=0];
-	" WHe: 4" -- " W: 2"	 [color=blue,
+	"heo: 4" -- "he: 2"	 [color=blue,
 		label=1];
-	"o!rd: 5" -- "!rd: 3"	 [color=blue,
+	"heo: 4" -- "o: 2"	 [color=red,
+		label=0];
+	"lheo: 7" -- "heo: 4"	 [color=blue,
 		label=1];
-	"o!rd: 5" -- "o: 2"	 [color=red,
+	"lheo: 7" -- "l: 3"	 [color=red,
 		label=0];
-	"l WHe: 7" -- " WHe: 4"	 [color=blue,
-		label=1];
-	"l WHe: 7" -- "l: 3"	 [color=red,
+	"rd Wlheo: 11" -- "rd W: 4"	 [color=red,
 		label=0];
-	"o!rdl WHe: 12" -- "o!rd: 5"	 [color=red,
-		label=0];
-	"o!rdl WHe: 12" -- "l WHe: 7"	 [color=blue,
+	"rd Wlheo: 11" -- "lheo: 7"	 [color=blue,
 		label=1];
 }

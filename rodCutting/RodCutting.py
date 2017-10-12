@@ -50,6 +50,70 @@ def bottomUpCutRod(prices, length, printSteps):
     printCutNumbers(cutsArray, length)
     return revenueArray
 
+# Computes the Solution to a Rod Cutting problem of given length and an array of prices
+# taking into acccount the a unit cost of $1/cut
+def bottomUpCutRodNetRev(prices, length, printSteps):
+    #Populate the array with hashmarks indicated values not calculated yet
+    revenueArray = fillInRevenueArray(length)
+    #Array that indicates the optimal cuts for printing to the screen
+    cutsArray = fillInCutsArray(length)
+
+    if(printSteps):
+        print("\nSolving via optimal sub-problems:")
+        print("----------------------------------")
+    else:
+        print("\nSolution:")
+        print("----------")
+
+    #Loop through all sub-problems
+    for j in range(1, length + 1):
+        subPrice = 0
+        for i in range(0,j):
+            #Determine the cost per sub-problem ($Cost/cut)
+            if(i == j-1):
+                cost = 0
+            else:
+                cost = 1
+
+            #Determine if this net-profit is greater than previously solved sub-problems
+            if subPrice < (prices[i] + revenueArray[j-i-1] - cost):
+                subPrice = prices[i] + revenueArray[j-i-1] - cost
+                cutsArray[j] = i+1
+        revenueArray[j] = subPrice
+
+        #If user specified to show steps
+        if(printSteps):
+            if(j == length):
+                print("\nSolution:")
+                print("----------")
+            printTable(length, revenueArray)
+
+            #Sleep to allow the print-out to be spaced
+            time.sleep(2)
+
+    printCutNumbers(cutsArray, length)
+    return revenueArray
+
+def optimalRevLoop(menu_option, prices, length, printSteps):
+    # Ensure valid input from user
+    while (True):
+        try:
+            menu_option = int(input())
+        except ValueError:
+            print("\nIncorrect input format. Please try again.")
+        else:
+            break
+
+    if menu_option == 1:
+        printPriceTable(length, prices)
+        if not printSteps:
+            printTable(length, bottomUpCutRodNetRev(prices, length, printSteps))
+        else:
+            bottomUpCutRodNetRev(prices, length, printSteps)
+    else:
+        return
+
+
 def printCutNumbers(cutsArray, length):
     cutString = "\nThe optimal cuts are:"
     while (length > 0):
@@ -60,8 +124,8 @@ def printCutNumbers(cutsArray, length):
     print(newString)
 
 def printTable(length, revenueArray):
-    tableHeader = "\nlength i | "
-    values = "value  r | "
+    tableHeader = "\nlength   i | "
+    values = "revenue  r | "
 
     #start with 11 spaces due to the header
     totalLength = 11
@@ -136,6 +200,12 @@ def fillInCutsArray(length):
 
     return cutsArray
 
+def optimalRevPrompt():
+    print("\nView solution to problem considering an incurred cost/cut?")
+    print("------------------------------------------------------------")
+    print("1. Yes")
+    print("2. No")
+
 def main():
 
 
@@ -144,7 +214,7 @@ def main():
 
     # keep looping until user chooses to quit
     while menu:
-        print("\nSelect rod integer length: ")
+        print("\nInput rod integer length or type 0 to quit: ")
 
         #Ensure valid input from user
         while(True):
@@ -156,26 +226,13 @@ def main():
                 break
 
         #Ensure value from user is within problem constraints
+        if(length == 0):
+            break;
         while(length > 40):
             print("\nRod length must be less than or equal to 40. Please try again: ")
             length = int(input())
 
-        print("\nSelect problem solving method:")
-        print("---------------------------------")
-        print("1. Bottom-up Method")
-        print("2. Top-down Method")
-        print("0. Quit")
-
-        #Ensure valid input from user
-        while(True):
-            try:
-                menu_option1 = int(input())
-            except ValueError:
-                print("\nIncorrect input format. Please try again.")
-            else:
-                break
-
-        print("\nSelect solution form:")
+        print("\nType the number of solution form:")
         print("-------------------")
         print("1. Step-by-step")
         print("2. Solve")
@@ -194,7 +251,12 @@ def main():
         prices = [1]
         randomPrice = 1
         for i in range(1,length):
-            randomPrice += random.randint(0, 5)
+            if i <= 5:
+                randomPrice += random.randint(0, 5)
+            elif i <=10:
+                randomPrice += random.randint(0, 3)
+            else:
+                randomPrice += random.randint(0, 2)
             prices += [randomPrice]
 
         if menu_option2 == 1:
@@ -203,13 +265,16 @@ def main():
             print("\nTry to solve on your own. Press ENTER to show steps.")
             input()
             bottomUpCutRod(prices, length, True)
-            break
+            optimalRevPrompt()
+            optimalRevLoop(menu_option2, prices, length, True)
 
         elif menu_option2 == 2:
             print("\nThe prices per length i: ")
             printPriceTable(length, prices)
             printTable(length, bottomUpCutRod(prices, length, False))
-            break
+            optimalRevPrompt()
+            optimalRevLoop(menu_option2, prices, length, False)
+
         else:
             break
 

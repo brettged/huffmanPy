@@ -7,8 +7,6 @@ CSCI 5451
 Last Updated: 10/6/2017
 """
 
-# import subprocess
-# import time
 
 # use the pygraphviz wrapper to plot the huffman tree
 import pygraphviz as pgv
@@ -102,10 +100,13 @@ class HuffmanTree():
             self.pygraph.add_edge(new_node, node1, label='1', color='blue')
 
 
-        # show progression of huffman tree
+        # # show progression of huffman tree
         # self.pygraph.write('temp.dot')
         # self.pygraph.layout(prog='dot')
         # self.pygraph.draw('temptreePic.png')
+        #
+        # img = Image.open('temptreePic.png')
+        # img.show()
 
         # set bit type. This corresponds to the encoding path
         new_node.leftchild.bit_type = '0'
@@ -121,7 +122,7 @@ class HuffmanTree():
 
         # briefly sleep and then close the open picture.
         # An attempt to make it look like the tree is building
-        # time.sleep(.5)
+        # time.sleep(2)
 
     def build_tree(self):
         """

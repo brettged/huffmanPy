@@ -103,7 +103,15 @@ def run_on_file(char_list, filename):
 
     print("Creating huffman encoding now...")
 
-    input_file = open(filename, "r")
+    while True:
+        try:
+            input_file = open(filename, "r")
+        except IOError:
+            print("Could not open file. Please enter valid filename: ")
+            filename = input()
+        else:
+            break
+
     output_file = open("encoded" + filename, "w")
 
     # call function to read in all characters
@@ -212,7 +220,16 @@ def main():
         print("2. Input a string")
         print("0. Quit")
 
-        menu_option = int(input())
+
+        while True:
+
+            try:
+                menu_option = int(input())
+            except ValueError:
+                print("Incorrect format please enter again")
+            else:
+                break
+
 
         if menu_option == 1:
             # get filename
